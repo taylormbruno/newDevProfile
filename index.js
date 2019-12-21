@@ -40,6 +40,14 @@ async function init() {
 
         // generate HTML
         const genHTML = generateHTML(data, userInfo, stars);
+        const filename = `${userInfo.login}.html`;
+        // create HTML file or else icons do not show on PDF.
+        fs.writeFile(filename, genHTML, (err) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("HTML Complete!");
+        });
 
         // generate pdf
         const browser = await puppeteer.launch();
